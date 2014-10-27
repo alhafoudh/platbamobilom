@@ -1,6 +1,10 @@
 require 'minitest_helper'
 
 describe Platbamobilom::Redirect do
+  before(:each) do
+    Platbamobilom.test_mode = true
+  end
+
   let(:described_class) { Platbamobilom::Redirect }
   let(:subject) do
     described_class.new(
@@ -31,5 +35,13 @@ describe Platbamobilom::Redirect do
 
   it 'signes the parameters correctly' do
     assert_equal signature, subject.sign(secret)
+  end
+
+  it 'has different url based on test mode' do
+    Platbamobilom.test_mode = true
+    assert_equal described_class.test_url, described_class.url
+
+    Platbamobilom.test_mode = false
+    assert_equal described_class.production_url, described_class.url
   end
 end

@@ -5,6 +5,7 @@ module Platbamobilom
 
     def self.production_url; PRODUCTION_URL end
     def self.test_url; TEST_URL end
+    def self.url; (Platbamobilom.test_mode ? test_url : production_url) end
 
     attr_reader :pid
     attr_reader :id

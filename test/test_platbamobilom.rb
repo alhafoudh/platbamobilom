@@ -1,11 +1,7 @@
 require 'minitest_helper'
 
-class TestPlatbamobilom < MiniTest::Unit::TestCase
-  def test_that_it_has_a_version_number
+describe Platbamobilom do
+  it 'has a version number' do
     refute_nil ::Platbamobilom::VERSION
-  end
-
-  def test_it_does_something_useful
-    assert false
   end
 end

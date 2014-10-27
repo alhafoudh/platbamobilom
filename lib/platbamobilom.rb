@@ -1,5 +1,5 @@
-require "platbamobilom/version"
+require 'platbamobilom/version'
+require 'platbamobilom/redirect'
 
 module Platbamobilom
-  # Your code goes here...
 end

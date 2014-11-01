@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Platbamobilom::VERSION
   spec.authors       = ['Ahmed Al Hafoudh']
   spec.email         = ['alhafoudh@freevision.sk']
-  spec.summary       = %q{platbamobilom.sk signature generation and verification}
+  spec.summary       = %q{Gem for platbamobilom.sk signature generation and verification}
   spec.description   = %q{This gem provides a set of helpers to generate and verify signatures of http://www.platbamobilom.sk service.}
   spec.homepage      = 'https://github.com/alhafoudh/platbamobilom'
   spec.license       = 'MIT'

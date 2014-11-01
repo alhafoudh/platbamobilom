@@ -29,6 +29,22 @@ module Platbamobilom
       hmac          = OpenSSL::HMAC.digest(digest, secret, signing_data)
       signature     = hmac.unpack('H*').join.upcase
     end
+
+    def signed_query_string(signature)
+      Rack::Utils.build_query({
+        PID: pid,
+        ID: id,
+        DESC: desc,
+        PRICE: price,
+        URL: url,
+        EMAIL: email,
+        SIGN: signature
+      })
+    end
+
+    def signed_url(signature)
+      '%s?%s' % [self.class.url, signed_query_string(signature)]
+    end
     
   end
 end

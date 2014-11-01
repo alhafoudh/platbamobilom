@@ -1,3 +1,5 @@
+require 'rack/utils'
+
 require 'platbamobilom/version'
 require 'platbamobilom/redirect'
 

@@ -8,16 +8,18 @@ describe Platbamobilom::Redirect do
   let(:described_class) { Platbamobilom::Redirect }
   let(:subject) do
     described_class.new(
-      pid:    'some pid',
-      id:     'some id',
+      pid:    '1',
+      id:     '445566',
       desc:   'some description',
       price:  '3.10',
-      url:    'http://redirect.url/',
+      url:    'http://redirect.url',
       email:  'sales@example.com'
     )
   end
-  let(:secret) { 'a83592a4ba3bab05417e701309832fee0b1c51271c2ac3e0a55c25cfb447e024' }
-  let(:signature) { 'A47893A32EA3E887AAEA21CDFE0EB24863EC5F6E4C28E0D210EFE30A6C4FE606' }
+  let(:secret) { 'test' }
+  let(:signature) { 'AF7E772D957225E8A40E5D77801D095AFD82FBBE600BC9CB9DE06A514621D02F' }
+  let(:signed_query_string) { 'PID=1&ID=445566&DESC=some+description&PRICE=3.10&URL=http%3A%2F%2Fredirect.url&EMAIL=sales%40example.com&SIGN=AF7E772D957225E8A40E5D77801D095AFD82FBBE600BC9CB9DE06A514621D02F' }
+  let(:signed_url) { '%s?%s' % [described_class.url, signed_query_string] }
 
   it 'has redirect url for specific environment' do
     assert_equal 'https://pay.platbamobilom.sk/pay/', described_class.production_url
@@ -25,16 +27,24 @@ describe Platbamobilom::Redirect do
   end
 
   it 'initializes with all required parameters' do
-    assert_equal subject.pid, 'some pid'
-    assert_equal subject.id, 'some id'
+    assert_equal subject.pid, '1'
+    assert_equal subject.id, '445566'
     assert_equal subject.desc, 'some description'
     assert_equal subject.price, '3.10'
-    assert_equal subject.url, 'http://redirect.url/'
+    assert_equal subject.url, 'http://redirect.url'
     assert_equal subject.email, 'sales@example.com'
   end
 
   it 'signes the parameters correctly' do
     assert_equal signature, subject.sign(secret)
+  end
+
+  it 'generates signed query string' do
+    assert_equal signed_query_string, subject.signed_query_string(signature)
+  end
+
+  it 'generates signed url' do
+    assert_equal signed_url, subject.signed_url(signature)
   end
 
   it 'has different url based on test mode' do

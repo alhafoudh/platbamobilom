@@ -19,7 +19,7 @@ describe Platbamobilom::Redirect do
   let(:secret) { 'test' }
   let(:signature) { 'AF7E772D957225E8A40E5D77801D095AFD82FBBE600BC9CB9DE06A514621D02F' }
   let(:signed_query_string) { 'PID=1&ID=445566&DESC=some+description&PRICE=3.10&URL=http%3A%2F%2Fredirect.url&EMAIL=sales%40example.com&SIGN=AF7E772D957225E8A40E5D77801D095AFD82FBBE600BC9CB9DE06A514621D02F' }
-  let(:signed_url) { '%s?%s' % [described_class.url, signed_query_string] }
+  let(:signed_url) { 'https://pay.platbamobilom.sk/test/?PID=1&ID=445566&DESC=some+description&PRICE=3.10&URL=http%3A%2F%2Fredirect.url&EMAIL=sales%40example.com&SIGN=AF7E772D957225E8A40E5D77801D095AFD82FBBE600BC9CB9DE06A514621D02F' }
 
   it 'has redirect url for specific environment' do
     assert_equal 'https://pay.platbamobilom.sk/pay/', described_class.production_url

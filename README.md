@@ -1,4 +1,4 @@
-# platbamobilom
+# platbamobilom [![Build Status](https://travis-ci.org/alhafoudh/platbamobilom.svg?branch=develop)](https://travis-ci.org/alhafoudh/platbamobilom)
 
 This gem provides a set of helpers to generate and verify signatures of [platbamobilom.sk](http://www.platbamobilom.sk) service.
 

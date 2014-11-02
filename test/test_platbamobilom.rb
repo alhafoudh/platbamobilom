@@ -1,11 +1,23 @@
 require 'minitest_helper'
 
-class TestPlatbamobilom < MiniTest::Unit::TestCase
-  def test_that_it_has_a_version_number
+describe Platbamobilom do
+  before(:each) do
+    Platbamobilom.reset!
+  end
+
+  it 'has a version number' do
     refute_nil ::Platbamobilom::VERSION
   end
 
-  def test_it_does_something_useful
-    assert false
+  it 'is in test mode as default' do
+    assert_equal true, Platbamobilom.test_mode
+  end
+
+  it 'can disable test mode' do
+    assert_equal true, Platbamobilom.test_mode
+
+    Platbamobilom.test_mode = false
+
+    assert_equal false, Platbamobilom.test_mode
   end
 end

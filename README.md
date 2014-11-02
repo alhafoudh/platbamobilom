@@ -27,12 +27,12 @@ Or install it yourself as:
 secret = 'test'
 
 redirect = Platbamobilom::Redirect.new(
-  pid:    '1',
-  id:     '445566',
-  desc:   'some description',
-  price:  '3.10',
-  url:    'http://redirect.url',
-  email:  'sales@example.com'
+  pid:   '1',
+  id:    '445566',
+  desc:  'some description',
+  price: '3.10',
+  url:   'http://redirect.url',
+  email: 'sales@example.com'
 )
 
 signature = redirect.sign(secret) # => 'AF7E772D957225E8A40E5D77801D095AFD82FBBE600BC9CB9DE06A514621D02F'
@@ -40,6 +40,26 @@ signature = redirect.sign(secret) # => 'AF7E772D957225E8A40E5D77801D095AFD82FBBE
 # Generate signed URL
 
 redirect.signed_url(signature) # => 'https://pay.platbamobilom.sk/test/?PID=1&ID=445566&DESC=some+description&PRICE=3.10&URL=http%3A%2F%2Fredirect.url&EMAIL=sales%40example.com&SIGN=AF7E772D957225E8A40E5D77801D095AFD82FBBE600BC9CB9DE06A514621D02F'
+
+# Verify signature
+
+verification = Platbamobilom::Verification.new(
+  id:        '445566',
+  result:    'OK',
+  phone:     '421903000000',
+  signature: '2FD327601CC033ED60A610EAF1239C5E958774426F6CC1D6B48DE422336784A3'
+)
+
+verification.verify(secret) # => true
+
+verification = Platbamobilom::Verification.new(
+  id:        '445566',
+  result:    'FAIL',
+  phone:     '421903000000',
+  signature: '2FD327601CC033ED60A610EAF1239C5E958774426F6CC1D6B48DE422336784A3'
+)
+
+verification.verify(secret) # => false
 ```
 
 ## Contributing

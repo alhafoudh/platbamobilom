@@ -2,6 +2,7 @@ require 'rack/utils'
 
 require 'platbamobilom/version'
 require 'platbamobilom/redirect'
+require 'platbamobilom/verification'
 
 module Platbamobilom
   class << self
